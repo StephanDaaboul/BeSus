@@ -15,11 +15,9 @@ class MainApp(MDApp):
         sm.add_widget(SplashScreen(name='splash'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ChallengesScreen(name='challenges'))
-        #Clock.schedule_once(HomeScreen)
-        return sm
-    
-        
-      
+        sm.add_widget(FriendsScreen(name='friends'))
+
+        return sm   
 
 class SplashScreen(Screen):
     def switch(self, *args):
@@ -33,6 +31,9 @@ class HomeScreen(Screen):
 
 class ChallengesScreen(Screen):
     pass
+
+class FriendsScreen(Screen):
+    pass
     
 class ScrollList(ScrollView):
     text = StringProperty()
@@ -43,5 +44,13 @@ class ElementCard(MDCard):
     items_count = StringProperty()
     subtext = StringProperty()
 
-    
+class ChallengeCard(MDCard):
+    text = StringProperty()
+    image = StringProperty()
+
+class FriendCard(MDCard):
+    name = StringProperty()
+    image = StringProperty()
+    points= StringProperty()
+   
 MainApp().run()

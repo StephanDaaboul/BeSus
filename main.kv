@@ -48,13 +48,14 @@ ScreenManager:
             ElementCard:
                 image:"images/food.png"
                 text:"Challenges"
-                items_count:"4 Items"
+                items_count:"5 Challenges"
                 on_release: app.root.current = 'challenges'
                 
             ElementCard:
                 image:"images/map.png"
                 text:"Friends"
                 items_count:""
+                on_release: app.root.current = 'friends'
             ElementCard:
                 image:"images/festival.png"
                 text:"Pictures"
@@ -88,15 +89,8 @@ ScreenManager:
                 MDBoxLayout:
                     adaptive_size:True
                     spacing:dp(10)
-                    MDLabel:
-                        text:"Home"
-                        text_size:None,None
-                        adaptive_width:True
-                    MDIcon:
-                        icon:'chevron-down'
-
             MDIconButton:
-                icon:"images/home.png"
+                icon:"images/return-icon.png"
                 on_release: root.manager.current = "home"
         ScrollView:
             MDGridLayout:
@@ -104,37 +98,26 @@ ScreenManager:
                 cols:1
                 padding:[dp(15),dp(15),dp(15),dp(35)]
                 spacing:dp(15)
-                ElementCard:
+                ChallengeCard:
                     image:"images/calendar.png"
                     text:"Plant a tree"
-                    subtext:"March, Wednesday"
-                    items_count:"3 Events"
-                    #on_release: 
-                    #    root.manager.current = "new_challenge"
+                    on_release: print("Challange: Plant a tree started")
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/food.png"
                     text:"Groceries"
-                    subtext:"Broccoli, Apple"
-                    items_count:"4 Items"
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/map.png"
                     text:"Location"
-                    subtext:"Lucy Mao going to Office"
-                    items_count:""
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/festival.png"
                     text:"Activity"
-                    items_count:""
-                    subtext:"Rose favorite your Post"
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/todo.png"
                     text:"To Do"
-                    subtext:"Homework, Design"
-                    items_count:"4 Items"
 
 <NewChallengeScreen>:
     canvas.before:
@@ -167,6 +150,71 @@ ScreenManager:
             MDIconButton:
                 icon:"images/notification.png"
 
+<FriendsScreen>:
+    canvas.before:
+        Color:
+            rgba: 255/255,255/255,255/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"BeSus"
+                    font_style:"H4"
+                MDBoxLayout:
+                    adaptive_size:True
+                    spacing:dp(10)
+                    MDLabel:
+                        text:"Home"
+                        text_size:None,None
+                        adaptive_width:True
+                    MDIcon:
+                        icon:'chevron-down'
+
+            MDIconButton:
+                icon:"images/home.png"
+                on_release: root.manager.current = "home"
+        ScrollView:
+            MDGridLayout:
+                size_hint_y:1.25
+                cols:1
+                padding:[dp(15),dp(15),dp(15),dp(35)]
+                spacing:dp(15)
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie1"
+                    points:"1000"
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie2"
+                    points:"950"
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie3"
+                    points:"900"
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie4"
+                    points:"850"
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie5"
+                    points:"69"
+                FriendCard:
+                    image:"images/calendar.png"
+                    name:"Homie6"
+                    points:"0"
+                FriendCard:
+                    image:"images/home.png"
+                    text:"Home"
+                    on_release: root.manager.current = "home"
+
 <ElementCard>:
     md_bg_color:165/255,202/255,122/255
     line_color:(0.2, 0.2, 0.2, 0.8)
@@ -198,3 +246,51 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.items_count
+
+
+<ChallengeCard>:
+    md_bg_color:165/255,202/255,122/255
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+    items_count:""
+    subtext:''
+
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_style:"H6"
+
+<FriendCard>:
+    md_bg_color:165/255,202/255,122/255
+    line_color:(0.2, 0.2, 0.2, 0.8)
+    style:"elevated"
+    shadow_softness:4
+    shadow_offset:(2, 2) 
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: False
+    image:''
+    name:""
+    points:""
+
+    orientation:'horizontal'
+    Image:
+        source:root.image
+    MDLabel:
+        halign:"left"
+        text:root.name
+        font_style:"H4"
+    MDLabel:
+        halign:"center"
+        text:root.points
+        font_style:"H4"
