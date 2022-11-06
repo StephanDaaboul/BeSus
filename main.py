@@ -16,6 +16,9 @@ class Friend():
 
 
 class MainApp(MDApp):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.user_points = 0
 
     def build(self):
         global sm
@@ -34,6 +37,10 @@ class MainApp(MDApp):
     def complete_challenge(self, points):
         self.user_points += points
         print(self.user_points)
+
+    def get_points(self):
+        return str(self.user_points)
+
 class SplashScreen(Screen):
     def switch(self, *args):
         self.parent.current = 'home'
@@ -68,12 +75,10 @@ class ChallengeCard(MDCard):
     image = StringProperty()
 
 class FriendCard(MDCard):
-    def build(self, friend, **kwargs):
-        self.root.name = StringProperty(friend.name)
-        self.root.points = StringProperty(friend.points)
-        self.root.image = StringProperty(friend.image)
-        super().__init__(**kwargs)
-
+    name = StringProperty()
+    image = StringProperty()
+    points = StringProperty()
+    
 class NewChallengeCard(MDCard):
     text = StringProperty()
     image = StringProperty()
