@@ -11,12 +11,16 @@ class MainApp(MDApp):
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ChallengesScreen(name='challenges'))
+        sm.add_widget(FriendsScreen(name='friends'))
         return sm
    
 class HomeScreen(Screen):
     pass
 
 class ChallengesScreen(Screen):
+    pass
+
+class FriendsScreen(Screen):
     pass
     
 class ScrollList(ScrollView):
@@ -31,5 +35,10 @@ class ElementCard(MDCard):
 class ChallengeCard(MDCard):
     text = StringProperty()
     image = StringProperty()
-       
+
+class FriendCard(MDCard):
+    name = StringProperty()
+    image = StringProperty()
+    points= StringProperty()
+   
 MainApp().run()
