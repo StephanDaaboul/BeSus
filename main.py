@@ -3,12 +3,13 @@ from kivymd.app import MDApp
 from kivy.properties import StringProperty
 from kivymd.uix.card import MDCard
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.uix.scrollview import ScrollView
 
 
 class MainApp(MDApp):
     def build(self):
         self.title='KivyMD Dashboard'
-        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "DeepPurple"
 
         sm = ScreenManager()
@@ -21,6 +22,10 @@ class HomeScreen(Screen):
 
 class ChallengesScreen(Screen):
     pass
+    
+
+class ScrollList(ScrollView):
+    text = StringProperty()
    
 class ElementCard(MDCard):
     text = StringProperty()
