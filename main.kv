@@ -51,18 +51,19 @@ ScreenManager:
                 on_release: app.root.current = 'challenges'
                 
             ElementCard:
-                image:"images/map.png"
+                image:"images/trophy.png"
                 text:"Friends"
                 items_count:""
                 on_release: app.root.current = 'friends'
             ElementCard:
                 image:"images/festival.png"
-                text:"Pictures"
-                items_count:""
+                text:"Approve Friends"
+                items_count:"1 Approval Request"
+                on_release: app.root.current = 'approve'
             ElementCard:
-                image:"images/todo.png"
-                text:"To Do"
-                items_count:"4 Items"    
+                image:"images/pfp.png"
+                text:"Profile" 
+                on_release: app.root.current = 'profile'  
             ElementCard:
                 image:"images/setting.png"
                 items_count:"4 Items"
@@ -84,10 +85,7 @@ ScreenManager:
                 orientation:"vertical"
                 MDLabel:
                     text:"BeSus"
-                    font_style:"H4"
-                MDBoxLayout:
-                    adaptive_size:True
-                    spacing:dp(10)
+                    font_style:"H4" 
             MDIconButton:
                 icon:"images/return-icon.png"
                 on_release: root.manager.current = "home"
@@ -135,9 +133,6 @@ ScreenManager:
                 MDLabel:
                     text:"BeSus"
                     font_style:"H4"
-                MDBoxLayout:
-                    adaptive_size:True
-                    spacing:dp(10)
             MDIconButton:
                 icon:"images/return-icon.png"
                 on_release: root.manager.current = "home"
@@ -186,22 +181,95 @@ ScreenManager:
                 orientation:"vertical"
                 MDLabel:
                     text:"BeSus"
+                    font_style:"H4" 
+            MDIconButton:
+                valign:"center"
+                icon:"images/return-icon.png"
+                on_release: root.manager.current = "home"
+        MDBoxLayout:
+            size_hint_y:.60
+            padding:dp(25)
+            pose_hint:{"center_x":.5,"center_y":.5}
+            NewChallengeCard:
+                image:"images/tree.png"
+                text:"Plant a tree"
+                points:"1000 Points"
+                on_release:
+                    root.manager.current = "home"
+                    app.complete_challenge(1000)
+
+<ApproveChallengeScreen>:
+    canvas.before:
+        Color:
+            rgba: 255/255,255/255,255/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                MDLabel:
+                    text:"BeSus"
                     font_style:"H4"
-                MDBoxLayout:
-                    adaptive_size:True
-                    spacing:dp(10)
+                MDIconButton:
+                    icon:"images/return-icon.png"
+                    on_release: root.manager.current = "home"
+        MDBoxLayout:
+            padding:dp(25)
+            pos_hint:{"center_x":0.5}
+            size_hint_y:1.5
+            ApproveChallengeCard:
+                #size_hint_y: 0.85
+                pos_hint: {"center_x": .5, "center_y": .5}
+                image:"images/planted_tree.jpg"
+        MDBoxLayout:
+            size_adaptive:True
+            padding:dp(25)
+            pos_hint:{"center_x":0.5}
+            MDBoxLayout:
+                spacing:dp(10)
+                ApproveChallengeCard:
+                    image:"images/accept.png"
+                    on_release:
+                        root.manager.current = "home"
+                        print("Approved Friends Post")
+                ApproveChallengeCard:
+                    image:"images/decline.png"
+                    on_release:
+                        root.manager.current = "home"
+                        print("Declined Friends Post")
+
+<ProfileScreen>:
+    canvas.before:
+        Color:
+            rgba: 255/255,255/255,255/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"BeSus"
+                    font_style:"H4" 
             MDIconButton:
                 icon:"images/return-icon.png"
                 on_release: root.manager.current = "home"
-        NewChallengeCard:
-            size_hint_y: 0.85
-            image:"images/tree.png"
-            text:"Plant a tree"
-            points:"1000 Points"
-            on_release:
-                root.manager.current = "home"
-                app.complete_challenge(1000)
-
+        MDBoxLayout:
+            size_hint_y:.60
+            padding:dp(25)
+            pose_hint:{"center_x":.5,"center_y":.5}
+            ProfileCard:
+                image:"images/pfp.png"
+                name:"Homie1"
+                points:"1000"
 
 <ElementCard>:
     md_bg_color:165/255,202/255,122/255
@@ -311,3 +379,49 @@ ScreenManager:
         valign:"bottom"
         text:root.points
         font_style:"H3"
+
+<ApproveChallengeCard>:
+    md_bg_color:165/255,202/255,122/255
+    line_color:(0.2, 0.2, 0.2, 0.8)
+    style:"elevated"
+    shadow_softness:4
+    shadow_offset:(2, 2) 
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: False
+    image:'images/tree.png'
+    orientation:'vertical'
+    Image:
+        source: root.image
+        size_adaptive:True
+        pos_hint : {"center_x": .5, "center_y": .5}
+
+<ProfileCard>:
+    md_bg_color:165/255,202/255,122/255
+    line_color:(0.2, 0.2, 0.2, 0.8)
+    style:"elevated"
+    shadow_softness:4
+    shadow_offset:(2, 2) 
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: False
+    image:'images/pfp.png'
+    name:""
+    points:""
+    orientation:'vertical'
+    Image:
+        source: root.image
+        size_hint_y:2
+        pos_hint : {"center_x": .5, "center_y": .75}        
+    MDBoxLayout:
+        orientation:'horizontal'
+        MDLabel:
+            halign:"center"
+            text:root.name
+            font_style:"H4"
+        MDLabel:
+            halign:"center"
+            text:root.points
+            font_style:"H4"
