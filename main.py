@@ -14,14 +14,9 @@ class Friend():
         self.points = points
         self.image = image
 
-Friends = [
-    Friend(name="John"), 
-    Friend(name="Jane")
-]
-
-
 
 class MainApp(MDApp):
+
     def build(self):
         global sm
         self.theme_cls.material_style = "M3"
@@ -29,9 +24,16 @@ class MainApp(MDApp):
         sm.add_widget(SplashScreen(name='splash'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ChallengesScreen(name='challenges'))
+        sm.add_widget(NewChallengeScreen(name='newchallenge'))
         sm.add_widget(FriendsScreen(name='friends'))
+
+        self.user_points = 0
+
         return sm   
 
+    def complete_challenge(self, points):
+        self.user_points += points
+        print(self.user_points)
 class SplashScreen(Screen):
     def switch(self, *args):
         self.parent.current = 'home'
@@ -45,14 +47,11 @@ class HomeScreen(Screen):
 class ChallengesScreen(Screen):
     pass
 
+class NewChallengeScreen(Screen):
+    pass
+
 class FriendsScreen(Screen):
-    def update(self):
-        self.ids.grid.clear_widgets()
-        for friend in Friends:
-            self.ids.grid.add_widget(FriendCard(friend))
-    def on_enter(self):
-        for friend in Friends:
-            self.ids.grid.add_widget(FriendCard(friend))
+    pass
     
     
 class ScrollList(ScrollView):
@@ -75,5 +74,9 @@ class FriendCard(MDCard):
         self.root.image = StringProperty(friend.image)
         super().__init__(**kwargs)
 
+class NewChallengeCard(MDCard):
+    text = StringProperty()
+    image = StringProperty()
+    points = StringProperty()
 
 MainApp().run()

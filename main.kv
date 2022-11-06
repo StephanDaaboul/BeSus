@@ -98,9 +98,9 @@ ScreenManager:
                 padding:[dp(15),dp(15),dp(15),dp(35)]
                 spacing:dp(15)
                 ChallengeCard:
-                    image:"images/calendar.png"
+                    image:"images/tree.png"
                     text:"Plant a tree"
-                    on_release: print("Challange: Plant a tree started")
+                    on_release: root.manager.current = "newchallenge"
 
                 ChallengeCard:
                     image:"images/food.png"
@@ -117,37 +117,6 @@ ScreenManager:
                 ChallengeCard:
                     image:"images/todo.png"
                     text:"To Do"
-
-<NewChallengeScreen>:
-    canvas.before:
-        Color:
-            rgba: 255/255,255/255,255/255,1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    # Show a picture or text of challange and accept button
-    MDBoxLayout:
-        orientation:'vertical'
-        MDBoxLayout:
-            size_hint_y:.25
-            padding:dp(25)
-            MDBoxLayout:
-                orientation:"vertical"
-                MDLabel:
-                    text:"BeSus"
-                    font_style:"H4"
-                MDBoxLayout:
-                    adaptive_size:True
-                    spacing:dp(10)
-                    MDLabel:
-                        text:"Home"
-                        text_size:None,None
-                        adaptive_width:True
-                    MDIcon:
-                        icon:'chevron-down'
-
-            MDIconButton:
-                icon:"images/notification.png"
 
 <FriendsScreen>:
     canvas.before:
@@ -207,6 +176,38 @@ ScreenManager:
                     image:"images/return-icon.png"
                     name:"Home"
                     on_release: root.manager.current = "home"
+
+<NewChallengeScreen>:
+    canvas.before:
+        Color:
+            rgba: 255/255,255/255,255/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"BeSus"
+                    font_style:"H4"
+                MDBoxLayout:
+                    adaptive_size:True
+                    spacing:dp(10)
+            MDIconButton:
+                icon:"images/return-icon.png"
+                on_release: root.manager.current = "home"
+        NewChallengeCard:
+            size_hint_y: 0.85
+            image:"images/tree.png"
+            text:"Plant a tree"
+            points:"1000 Points"
+            on_release:
+                root.manager.current = "home"
+                app.complete_challenge(1000)
 
 <ElementCard>:
     md_bg_color:165/255,202/255,122/255
@@ -287,3 +288,32 @@ ScreenManager:
         halign:"center"
         text:root.points
         font_style:"H4"
+
+<NewChallengeCard>:
+    md_bg_color:165/255,202/255,122/255
+    line_color:(0.2, 0.2, 0.2, 0.8)
+    style:"elevated"
+    shadow_softness:4
+    shadow_offset:(2, 2) 
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: False
+    image:'images/todo.png'
+    text:"ChallengeText"
+    points:"0"
+    orientation:'vertical'
+    Image:
+        source: root.image
+        size_hint_y:2
+        pos_hint : {"center_x": .5, "center_y": .75}        
+    MDLabel:
+        halign:"center"
+        text:root.text
+        font_style:"H4"
+        valign:"bottom"
+    MDLabel:
+        halign:"center"
+        valign:"bottom"
+        text:root.points
+        font_style:"H3"
