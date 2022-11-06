@@ -61,9 +61,9 @@ ScreenManager:
                 items_count:"1 Approval Request"
                 on_release: app.root.current = 'approve'
             ElementCard:
-                image:"images/todo.png"
-                text:"To Do"
-                items_count:"4 Items"    
+                image:"images/pfp.png"
+                text:"Profile" 
+                on_release: app.root.current = 'profile'  
             ElementCard:
                 image:"images/setting.png"
                 items_count:"4 Items"
@@ -241,6 +241,36 @@ ScreenManager:
                     on_release:
                         root.manager.current = "home"
                         print("Declined Friends Post")
+
+<ProfileScreen>:
+    canvas.before:
+        Color:
+            rgba: 255/255,255/255,255/255,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"BeSus"
+                    font_style:"H4" 
+            MDIconButton:
+                icon:"images/return-icon.png"
+                on_release: root.manager.current = "home"
+        MDBoxLayout:
+            size_hint_y:.60
+            padding:dp(25)
+            pose_hint:{"center_x":.5,"center_y":.5}
+            ProfileCard:
+                image:"images/pfp.png"
+                name:"Homie1"
+                points:"1000"
+
 <ElementCard>:
     md_bg_color:165/255,202/255,122/255
     line_color:(0.2, 0.2, 0.2, 0.8)
@@ -366,3 +396,32 @@ ScreenManager:
         source: root.image
         size_adaptive:True
         pos_hint : {"center_x": .5, "center_y": .5}
+
+<ProfileCard>:
+    md_bg_color:165/255,202/255,122/255
+    line_color:(0.2, 0.2, 0.2, 0.8)
+    style:"elevated"
+    shadow_softness:4
+    shadow_offset:(2, 2) 
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: False
+    image:'images/pfp.png'
+    name:""
+    points:""
+    orientation:'vertical'
+    Image:
+        source: root.image
+        size_hint_y:2
+        pos_hint : {"center_x": .5, "center_y": .75}        
+    MDBoxLayout:
+        orientation:'horizontal'
+        MDLabel:
+            halign:"center"
+            text:root.name
+            font_style:"H4"
+        MDLabel:
+            halign:"center"
+            text:root.points
+            font_style:"H4"
