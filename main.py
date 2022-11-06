@@ -41,10 +41,6 @@ class FriendCard(MDCard):
     image = StringProperty()
     points= StringProperty()
 
-class Example(MDApp):
-    def build(self):
-        self.theme_cls.material_style = "M3"
-        return Builder.load_string(KV)
 
 def on_start(self):
     styles = {
