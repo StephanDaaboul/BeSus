@@ -27,5 +27,30 @@ class ElementCard(MDCard):
     image = StringProperty()
     items_count = StringProperty()
     subtext = StringProperty()
+
+class ChallengeCard(MDCard):
+    text = StringProperty()
+    image = StringProperty()
+
+class Example(MDApp):
+    def build(self):
+        self.theme_cls.material_style = "M3"
+        return Builder.load_string(KV)
+
+def on_start(self):
+    styles = {
+        "elevated": "#f6eeee", "filled": "#f4dedc", "outlined": "#f8f5f4"
+    }
+    for style in styles.keys():
+        self.root.ids.box.add_widget(
+            MDCard(
+                line_color=(0.2, 0.2, 0.2, 0.8),
+                style=style,
+                text=style.capitalize(),
+                md_bg_color=styles[style],
+                shadow_softness=2 if style == "elevated" else 12,
+                shadow_offset=(0, 1) if style == "elevated" else (0, 2),
+                )
+            )
     
 MainApp().run()

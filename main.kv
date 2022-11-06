@@ -93,37 +93,31 @@ ScreenManager:
                 cols:1
                 padding:[dp(15),dp(15),dp(15),dp(35)]
                 spacing:dp(15)
-                ElementCard:
+                ChallengeCard:
                     image:"images/calendar.png"
                     text:"Plant a tree"
-                    subtext:"March, Wednesday"
-                    items_count:"3 Events"
-                    #on_release: 
-                    #    root.manager.current = "new_challenge"
+                    on_release: print("Challange: Plant a tree started")
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/food.png"
                     text:"Groceries"
-                    subtext:"Broccoli, Apple"
-                    items_count:"4 Items"
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/map.png"
                     text:"Location"
-                    subtext:"Lucy Mao going to Office"
-                    items_count:""
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/festival.png"
                     text:"Activity"
-                    items_count:""
-                    subtext:"Rose favorite your Post"
 
-                ElementCard:
+                ChallengeCard:
                     image:"images/todo.png"
                     text:"To Do"
-                    subtext:"Homework, Design"
-                    items_count:"4 Items"
+
+                ChallengeCard:
+                    image:"images/home.png"
+                    text:"Home"
+                    on_release: root.manager.current = "home"
 
 <NewChallengeScreen>:
     canvas.before:
@@ -187,3 +181,25 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.items_count
+
+
+<ChallengeCard>:
+    md_bg_color:70/255,120/255,13/255
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+    items_count:""
+    subtext:''
+
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_style:"H6"
