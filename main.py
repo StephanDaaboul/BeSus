@@ -29,6 +29,7 @@ class MainApp(MDApp):
         sm.add_widget(ChallengesScreen(name='challenges'))
         sm.add_widget(NewChallengeScreen(name='newchallenge'))
         sm.add_widget(FriendsScreen(name='friends'))
+        sm.add_widget(ApproveChallengeScreen(name='approve'))
 
         self.user_points = 0
 
@@ -59,6 +60,9 @@ class NewChallengeScreen(Screen):
 
 class FriendsScreen(Screen):
     pass
+
+class ApproveChallengeScreen(Screen):
+    pass
     
     
 class ScrollList(ScrollView):
@@ -83,5 +87,8 @@ class NewChallengeCard(MDCard):
     text = StringProperty()
     image = StringProperty()
     points = StringProperty()
+
+class ApproveChallengeCard(MDCard):
+    image = StringProperty()
 
 MainApp().run()
